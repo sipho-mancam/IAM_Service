@@ -1,0 +1,23 @@
+[33mcommit 4e69f7ee62d62be9e2aa1884e1839d0dbf50dad1[m[33m ([m[1;36mHEAD -> [m[1;32mdevelopment[m[33m)[m
+Author: Sthembiso Musana <sthembisomusana2@gmail.com>
+Date:   Sat Nov 19 17:36:54 2022 +0200
+
+    The index page have been built, and partially linked to the google authentication, the fb plug have been started, still under planning and review, to implement apple sign in as well, then db migrations
+
+[33mcommit 751531eb13a06cb9ac96b885e519895a4c4488d4[m
+Author: Sthembiso Musana <sthembisomusana2@gmail.com>
+Date:   Sat Nov 19 03:50:36 2022 +0200
+
+    Google Authentication Working Properly in the test environment
+
+[33mcommit a0f913cbf4d0af8bbcad01564304901c7c6aad47[m
+Author: Sthembiso Musana <sthembisomusana2@gmail.com>
+Date:   Sat Nov 19 00:59:28 2022 +0200
+
+    Google Authentication Ready to test for redirect from Django Routes
+
+[33mcommit 9e1da161d1854e7a33a07fc922e719bf2f74096c[m[33m ([m[1;32mmain[m[33m)[m
+Author: Sthembiso Musana <sthembisomusana2@gmail.com>
+Date:   Fri Nov 18 22:03:21 2022 +0200
+
+    Identity Access Management Standalone service started
