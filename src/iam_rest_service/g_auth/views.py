@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-sys.path.append(Path(__file__+'../../../../../').resolve().as_posix()+'/helpers/')
+sys.path.append(Path(__file__+'../../../../').resolve().as_posix()+'/helpers/')
 from django.shortcuts import render
 from gAuth import *
 from django.http import HttpResponse, HttpRequest

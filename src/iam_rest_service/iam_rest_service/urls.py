@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('g_auth/', include('Apps.google_auth.urls')),
+    path('g_auth/', include('g_auth.urls')),
+    path('', include('index_page.urls'))
 ]

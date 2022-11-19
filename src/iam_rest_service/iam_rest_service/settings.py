@@ -25,12 +25,19 @@ SECRET_KEY = 'django-insecure-c5k0i!#w$gq#$fwys%6h@k1@t0)l^2qn1*&n-1(#4&6d@i1hrv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '0.0.0.0',
+    "192.168.205.112",
+    'localhost',
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'index_page.apps.IndexPageConfig',
+    'fb_auth.apps.FbAuthConfig',
+    'g_auth.apps.GAuthConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

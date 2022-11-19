@@ -5,4 +5,4 @@ from . import views
 
 urlpattern=[
     path('', views.login, name='fb_login')
-]
+]  
