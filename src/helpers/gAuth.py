@@ -9,12 +9,12 @@ def google_authentication_url(scopes=['openid',
 
     flow = Flow.from_client_secrets_file(
         DATA_DIR+'/creds.json',
-        scopes=scopes
+        scopes=scopes,
     )
+
+    flow.redirect_uri = 'http://localhost:8000/g_auth/'
     url_t = flow.authorization_url()
-
-    return url_t[0]+'&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fgoogle_auth%2F'
-
+    return flow, url_t[0]
 
 def google_fetch_access_code(code: str, scopes=['openid',
                                          "https://www.googleapis.com/auth/userinfo.profile",
@@ -22,13 +22,14 @@ def google_fetch_access_code(code: str, scopes=['openid',
             
     flow = Flow.from_client_secrets_file(
         DATA_DIR+'/creds.json',
-        scopes=scopes
+        scopes=scopes,
     )
+    flow.redirect_uri = 'http://localhost:8000/g_auth/'
 
     flow.fetch_token(code=code)
 
     creds = flow.credentials
-    return creds.to_json()
+    return creds, creds.to_json()
 
 
 def google_user_data(creds)->dict:
@@ -36,6 +37,8 @@ def google_user_data(creds)->dict:
     service = build('oauth2', 'v2', credentials=creds)
 
     user_info = service.userinfo().get().execute()
+
+    user_info['userId'] = user_info['id']
 
     return user_info
 
