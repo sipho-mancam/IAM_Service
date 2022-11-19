@@ -1,0 +1,13 @@
+{
+    "web": {
+        "client_id": "364698434998-kuunideh9f34u24ci9l171jpamg7udm9.apps.googleusercontent.com",
+        "project_id": "iam-service-369021",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_secret": "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",
+        "redirect_uris": [
+            "http://localhost:8000/g_auth/"
+        ]
+    }
+}
