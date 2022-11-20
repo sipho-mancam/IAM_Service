@@ -7,6 +7,7 @@
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
         "client_secret": "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",
         "redirect_uris": [
+            "http://localhost:8000/g_auth/signup",
             "http://localhost:8000/g_auth/"
         ]
     }
