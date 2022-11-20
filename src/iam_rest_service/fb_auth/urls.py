@@ -2,6 +2,6 @@ from django.urls import path
 from . import views
 
 
-urlpattern=[
+urlpatterns = [
     path('', views.login, name='fb_login')
 ]  

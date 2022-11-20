@@ -4,5 +4,4 @@ from django.shortcuts import render
 
 def login(request):
     
-    
-    pass
+    return render(request, 'fb/fb.html', {})

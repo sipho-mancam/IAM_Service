@@ -8,19 +8,19 @@
     <title>Login With FB</title>
 </head>
 <body>
-    
+   
 </body>
-
+    
 <script>
     window.fbAsyncInit = function () {
         FB.init({
-            appId: 'your-app-id',
+            appId: '2174861422716987',
             autoLogAppEvents: true,
             xfbml: true,
             version: 'v15.0'
         });
     };
 </script>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-<script src="{% static fb/js/main.js%}" type="text/javascript"></script>
+<script async  crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk/debug.js" ></script>
+<script src="{% static 'fb/js/main.js' %}" type="text/javascript"></script>
 </html>
