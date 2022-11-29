@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 sys.path.append(Path(__file__+'../../../../').resolve().as_posix()+'/helpers/')
+
 from django.shortcuts import render, redirect
 from gAuth import *
 from django.http import HttpResponse, HttpResponseServerError
