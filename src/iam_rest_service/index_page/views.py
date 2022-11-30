@@ -11,8 +11,6 @@ import json
 
 sys.path.append(Path(__file__+'../../../../').resolve().as_posix()+'/helpers/')
 
-# print(sys.path)
-
 from gAuth import *
 
 # Create your views here.
@@ -106,51 +104,40 @@ def email_login(request):
         
 def g_signup(request):
     param = request.GET
-
     if 'code' in param:
         creds, token = google_fetch_access_code(param['code'])
-        user_info = google_user_data(creds=creds) 
+        user_info = google_user_data(creds=creds)
+        # if you are signing up it means that you don't have an account with us yet, let's confirm this.
+        # now how this works is that, if I perform a manual login (email style) and then signup with google, 
+        # the two accounts must be linked and show consistent information, so one email address can only be 
+        # associated with a single profile, we update the information to be based on the latest login method.
+        # let's grab the email address and search it in the db.
+        email = user_info['email']
+        user_info['profile_picture'] = user_info['picture']
+        user_info['userId'] = sha256(bytes(user_info['id'], 'utf-8')).hexdigest()
+
         try:
-            # check if user exist in db and then store new user or proceed.
-            u_c = User.objects.filter(userId=user_info['id'])
-            if len(u_c) > 0:
-                for u in u_c:
-                    u.delete()
-            
-            user = User(userId=user_info['id'], 
-                        email=user_info['email'], 
-                        name=user_info['name'],
-                        picture=user_info['picture'])
-            user.save()
-            id = user_info.get('id')
-            ur_l = R_URL + '?userId='+id if id is not None else 'error'
-            return redirect(ur_l)
+            u = UserProfile.objects.filter(email=email)
+            if len(u) == 0: # you haven't signed up with this email address
+                u = create_user(user_info)
+                return redirect(R_URL+'userId=%s'%user_info['userId'])
+            else:
+                # this means that you are in our database...
+                if u[0].userId == user_info['userId']:
+                    return redirect(R_URL+'?userId=%s'%user_info['userId'])
+                
+                u[0].name = user_info['name']
+                u[0].userId = user_info['userId']
+                u[0].profile_picture = user_info['profile_picture']
+                u[0].save()
+
+                print(u[0].name)
+                return redirect(R_URL+'?userId=%s'%user_info['userId']) 
+
         except Exception as e:
-            return HttpResponseServerError('There was an error signing in')
-            
-        
-    elif 'userId' in param:
-        # the user exists already in the server
-        user = User.objects.filter(userId=param['userId'])
-        if len(user)>0:
-            u = user[0]
-            ob = {}
-            ob['name'] = u.name
-            ob['email'] = u.email
-            ob['pciture'] = u.picture
-            ob['userId'] = u.userId
-            return HttpResponse(ob.__str__(), content_type='application/json')
-        else:
-            return HttpResponse({'info':'user not found'}, content_type='application/json')
-
-    elif 'error' in param:
-        # return the error message to the source url
-        return HttpResponseServerError('There was an error signing in')
-
+            return HttpResponseServerError('Unkown Server Error %s'% e.__str__())
 
     else:
         flow, url = google_authentication_url()
         return redirect(url)
 
-def g_login(request):
-    pass

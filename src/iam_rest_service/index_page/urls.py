@@ -7,6 +7,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('login', views.email_login, name='login'),
     path('signup', views.email_sign_up, name='sign-up'),
-    path('google/login', views.g_login, name='gLogin'),
     path('google/signup', views.g_signup, name='gSignup'),
 ]

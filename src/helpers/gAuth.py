@@ -12,7 +12,7 @@ def google_authentication_url(scopes=['openid',
         scopes=scopes,
     )
 
-    flow.redirect_uri = 'http://localhost:8000/g_auth/'
+    flow.redirect_uri = 'http://localhost:8000/google/signup'
     url_t = flow.authorization_url()
     return flow, url_t[0]
 
@@ -24,7 +24,7 @@ def google_fetch_access_code(code: str, scopes=['openid',
         DATA_DIR+'/creds.json',
         scopes=scopes,
     )
-    flow.redirect_uri = 'http://localhost:8000/g_auth/'
+    flow.redirect_uri = 'http://localhost:8000/google/signup'
 
     flow.fetch_token(code=code)
 

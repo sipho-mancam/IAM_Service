@@ -36,8 +36,6 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'index_page.apps.IndexPageConfig',
-    'fb_auth.apps.FbAuthConfig',
-    'g_auth.apps.GAuthConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
