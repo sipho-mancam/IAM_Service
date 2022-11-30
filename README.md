@@ -33,5 +33,13 @@ and deployed with the production ready program.
       * Successful Authentication will contain and status code and user data.
   * You can offer a retry utility, but to avoid Bruteforce attacks and that kind of stuff, we will limit the number of,
     login requests to 10 and block the "origin" for 8 next hours. </code>
+
+
+# To Do
+
+* Implement Security Protocols and Data encryption
+* Implement Resource Access Permisions (Users can only access data related to them only and nothing else)
+* Add Other Social Logins (Facebook requires HTTPS, not easy in development environment ... still thinking about it)
+* Build a Helper Python and JS scripts to handle flows on client side and other server side implementations
   
 
