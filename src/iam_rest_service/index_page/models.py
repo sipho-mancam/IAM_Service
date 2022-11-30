@@ -16,9 +16,6 @@ class UserProfile(models.Model):
     perms = models.JSONField(null=True, blank=True)
 
 
-    def get_json_representation(self):
-        return 'hello there %s' % self.email
-
 
 
 def create_user(name, last_name, email, userId, profile_picture, contact=None, friend_requests=None, friends=None, **kwargs):

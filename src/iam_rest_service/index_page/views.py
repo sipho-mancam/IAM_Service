@@ -13,6 +13,23 @@ sys.path.append(Path(__file__+'../../../../').resolve().as_posix()+'/helpers/')
 
 from gAuth import *
 
+
+# imports for the restful interface of the app
+from rest_framework import viewsets, permissions
+from .serializers import UserProfileSerializer
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    lookup_field = 'userId'
+
+
+####################################################
+# End of the Rest API code here                    #
+####################################################
+
+
 # Create your views here.
 R_URL = 'http://tnds.co.za'
 
