@@ -9,7 +9,7 @@ Offering a running service listening for RESTful Calls and Responding with the n
 This project and the time of this writing if currently running on this tech stack:
 
 * Django (Python Framework for building RESTful Endpoints and Serving Web Pages)
-* JAVA Scrip
+* Javascript
 * HTML (Django Templating Engine) and CSS
 * Google API Client (For Authenticating with Google and Getting User Profiles)
 * Facebook Customer API (For Authenticating with facebook)
@@ -27,12 +27,12 @@ and deployed with the production ready program.
 
 # Usage
 
- <code> * Setup and "login" link that you would've received from the registration page - corresponding to your project ID.  
+ Setup and "login" link that you would've received from the registration page - corresponding to your project ID.  
   * Wait for response status and data in your program, and handle:  as you please 
       * Failed Authentication - status code only.
       * Successful Authentication will contain and status code and user data.
   * You can offer a retry utility, but to avoid Bruteforce attacks and that kind of stuff, we will limit the number of,
-    login requests to 10 and block the "origin" for 8 next hours. </code>
+    login requests to 10 and block the "origin" for 8 next hours.
 
 
 # To Do
