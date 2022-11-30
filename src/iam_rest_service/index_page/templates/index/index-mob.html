@@ -18,7 +18,24 @@
     
     <div class="container" id="container">
         <div id="sign-up" class="form-container sign-up-container overlay-container">
-            <form action="#">
+            <form action="/signup" method="POST">
+
+                {% csrf_token %}
+
+                {% if error %}
+                <span style="color: red;">{{ error }}</span>
+                {% endif %}
+
+                {% if password %}
+                <ul style="color:red; display: block;">
+                    <b>Password too weak! </b>
+                    <li style="margin: 0px; font-size: smaller; text-align: left;">Must have: Upper case and lower case letters</li>
+                    <li style="margin: 0px; font-size: smaller; text-align: left;">Must have: %#$@@</li>
+                    <li style="margin: 0px; font-size: smaller; text-align: left;">Must have: 123451</li>
+                    <li style="margin: 0px; font-size: smaller; text-align: left;">Must have: 8 characters or more</li>
+                </ul>
+                {% endif %}
+
                 <h1>Create Account</h1>
                 <div class="social-container">
                     <!-- <a href="/fb_auth?type=login&id=sometoken" class="social"><i class="fab fa-facebook-f"></i></a> -->
@@ -34,7 +51,23 @@
             </form>
         </div>
         <div id="sign-in" class="form-container sign-in-container">
-            <form action="#">
+            <form action="/login" method="POST">
+                {% csrf_token %}
+
+                {% if error %}
+                <span style="color: red;">{{ error }}</span>
+                {% endif %}
+
+                {% if password %}
+                <ul style="color:red; display: block;">
+                    <b>Password too weak! </b> 
+                    <li style="margin: 0px; font-size: smaller; text-align: left;">Must have: Upper case and lower case letters</li>
+                    <li style="margin: 0px; font-size: smaller; text-align: left;">Must have: %#$@@</li>
+                    <li style="margin: 0px; font-size: smaller; text-align: left;">Must have: 123451</li>
+                    <li style="margin: 0px; font-size: smaller; text-align: left;">Must have: 8 characters or more</li>
+                </ul>
+                {% endif %}
+
                 <h1>Sign in</h1>
                 <div class="social-container">
                     <!-- <a href="/fb_auth?type=login&id=sometoken" class="social"><i class="fab fa-facebook-f"></i></a> -->
@@ -50,21 +83,6 @@
             </form>
         </div>
     </div>
-
-
-    <!-- <div class="footer">
-        <b> Follow me on </b>
-        <div class="icons">
-            <a href="https://github.com/kvaibhav01" target="_blank" class="social"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/vaibhavkhulbe143/" target="_blank" class="social"><i
-                    class="fab fa-instagram"></i></a>
-            <a href="https://medium.com/@vaibhavkhulbe" target="_blank" class="social"><i class="fab fa-medium"></i></a>
-            <a href="https://twitter.com/vaibhav_khulbe" target="_blank" class="social"><i
-                    class="fab fa-twitter-square"></i></a>
-            <a href="https://linkedin.com/in/vaibhav-khulbe/" target="_blank" class="social"><i
-                    class="fab fa-linkedin"></i></a>
-        </div>
-     -->
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

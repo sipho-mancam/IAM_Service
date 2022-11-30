@@ -8,6 +8,7 @@ from .models import UserProfile, create_user
 import sys
 from pathlib import Path
 import json
+from password_validator import PasswordValidator
 
 sys.path.append(Path(__file__+'../../../../').resolve().as_posix()+'/helpers/')
 
@@ -21,7 +22,7 @@ from .serializers import UserProfileSerializer
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     lookup_field = 'userId'
 
 
@@ -32,6 +33,10 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 
 # Create your views here.
 R_URL = 'http://tnds.co.za'
+password_schema = PasswordValidator()
+
+password_schema.min(8).max(100).has().digits().has().letters().has().symbols().has().lowercase().has().uppercase()
+
 
 def send_response_to_form(request, context={})->HttpResponse:
     ua = request.META['HTTP_USER_AGENT']
@@ -58,6 +63,13 @@ def email_sign_up(request):
         if form_data.is_valid():
             user_data = form_data.cleaned_data
             # Run validation chains
+
+            # validate the password
+            if not password_schema.validate(user_data.get('password')):
+                context = {'password':True}
+
+                return send_response_to_form(request, context)
+
             try:
                 # check if email already taken
                 User.objects.get(email=user_data.get('email'))
@@ -110,8 +122,15 @@ def email_login(request):
                 return send_response_to_form(request, {'error':'Invalid Credentials'})
             else:
                 # get user id from the user profiles.
-                u = UserProfile.objects.get(email=email)
-                print(u.get_json_representation())
+                try:
+                    u = UserProfile.objects.get(email=email)
+                except UserProfile.DoesNotExist as e:
+
+                    userId = sha256(bytes(user_data.__str__(), 'utf-8')).hexdigest()
+                    user_data['userId'] = userId
+                    user_data['friends'] = json.encoder.JSONEncoder().encode({'iadas':{'accepted': True}})
+                    u = create_user(user_data)
+
                 return redirect(R_URL+'?userId=%s'%u.userId)
     else:
         # still to implement get based forms -- probably will just return a security error
@@ -137,7 +156,7 @@ def g_signup(request):
             u = UserProfile.objects.filter(email=email)
             if len(u) == 0: # you haven't signed up with this email address
                 u = create_user(user_info)
-                return redirect(R_URL+'userId=%s'%user_info['userId'])
+                return redirect(R_URL+'?userId=%s'%user_info['userId'])
             else:
                 # this means that you are in our database...
                 if u[0].userId == user_info['userId']:
