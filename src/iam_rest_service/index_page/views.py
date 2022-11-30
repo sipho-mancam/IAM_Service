@@ -125,12 +125,10 @@ def email_login(request):
                 try:
                     u = UserProfile.objects.get(email=email)
                 except UserProfile.DoesNotExist as e:
-
+                    # if the user has valid login credentials but no profile, create one.
                     userId = sha256(bytes(user_data.__str__(), 'utf-8')).hexdigest()
                     user_data['userId'] = userId
-                    user_data['friends'] = json.encoder.JSONEncoder().encode({'iadas':{'accepted': True}})
                     u = create_user(user_data)
-
                 return redirect(R_URL+'?userId=%s'%u.userId)
     else:
         # still to implement get based forms -- probably will just return a security error
@@ -149,6 +147,8 @@ def g_signup(request):
         # associated with a single profile, we update the information to be based on the latest login method.
         # let's grab the email address and search it in the db.
         email = user_info['email']
+
+        # preparing some data for later saving
         user_info['profile_picture'] = user_info['picture']
         user_info['userId'] = sha256(bytes(user_info['id'], 'utf-8')).hexdigest()
 
