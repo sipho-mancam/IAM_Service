@@ -16,7 +16,7 @@ After having developed a fair amount of applications, I have come to realise tha
 
 # Tech Stack
 
-This project and the time of this writing if currently running on this tech stack:
+This project at the time of this writing I'm currently running on this tech stack:
 
 * Django Framework
 * Django REST Framework
@@ -37,21 +37,21 @@ The process for this application is fairly straight forward, what you need to do
     
     git clone https://github.com/sipho-mancam/IAM_service.git
 
-    cd IAM_service
+    cd IAM_service \
 
-    python3.x -m venv .venv 
+    python3.x -m venv .venv \
 
-    source ./.venv/bin/activate
+    source ./.venv/bin/activate \
 
-    pip install -r requirements.txt
+    pip install -r requirements.txt \
 
-    cd ./src/iam_rest_service
+    cd ./src/iam_rest_service \
 
-    python manage.py runserver 
+    python manage.py runserver  \
     
     # open browser navigate to localhost:8080 
 
-    Yippiii!!!! You have succesfully built the service and it's ready to run.
+    # Yippiii!!!! You have succesfully built the service and it's ready to run.
 
 # Usage
 
@@ -73,7 +73,7 @@ The process for this application is fairly straight forward, what you need to do
 
 # Remarks
 
-From this project, I learnt a lot, to outline a few:
+From this project I learnt the following:
 
 1. How to user the django-rest framework using routers and class based views   with serializers
 2. Using the Google Rest API to access user information and authenticating users with OAuth2 screen.
