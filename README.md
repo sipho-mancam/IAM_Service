@@ -30,7 +30,7 @@ The process for this application is fairly straight forward, what you need to do
 
 **Requirements:**
     
-    1. Python3.10
+    1. Python3.10 and above
     2. git or and svc that can pull github repositories
 
 **Build**
@@ -39,7 +39,7 @@ The process for this application is fairly straight forward, what you need to do
 
     cd IAM_service \
 
-    python3.x -m venv .venv \
+    python3.10 -m venv .venv \
 
     source ./.venv/bin/activate \
 
